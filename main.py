@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from matrix_operations import *
 
 # 全局变量：矩阵数组和变量字典
@@ -108,18 +109,28 @@ def parse_statement(statement):
     else:
         print("无效的语句")
 
+def print_help():
+    try:
+        with open('help.txt', 'r') as file:
+            help_text = file.read()
+            print(help_text)
+    except FileNotFoundError:
+        print("帮助文档文件未找到。")
+
 def main():
     global matrix_array, variable_dict
     matrix_array.append([[]])
     variable_dict["ans"] = len(matrix_array) - 1
-    print("欢迎使用矩阵计算器！")
+    print("欢迎使用矩阵计算器！输入 help 查看帮助文档。")
     while True:
         statement = input(">> ")
         if statement.strip().lower() == 'quit':
             print("感谢使用矩阵计算器！")
             break
-        
-        parse_statement(statement)
+        elif statement.strip().lower() == 'help':
+            print_help()
+        else:
+            parse_statement(statement)
 
 if __name__ == "__main__":
     main()
