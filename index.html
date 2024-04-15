@@ -14,7 +14,7 @@
     <script>
         async function runPythonFile() {
             // Initialize Pyodide
-            await loadPyodide({
+            const pyodide = await loadPyodide({
                 indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.18.1/full/'
             });
 
@@ -24,7 +24,7 @@
             pyodide.runPython(pythonCode);
         }
 
-        runPythonFile();
+        runPythonFile().catch(err => console.error(err));
     </script>
 </body>
 </html>
