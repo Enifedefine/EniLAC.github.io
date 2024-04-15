@@ -96,7 +96,12 @@ def parse_statement(statement):
                 return
             matrix_data = matrix_array[variable_dict[value_name]]
         else:
-            matrix_data = get_input_matrix()
+            try:
+                print("请输入二维数组(每行以空格分隔,回车结束输入):")
+                matrix_data = get_input_matrix()
+            except ValueError as e:
+                print(e)
+                return
         if var_name in variable_dict:
             matrix_array[0] = matrix_array[variable_dict[var_name]]
             matrix_array[variable_dict[var_name]] = matrix_data

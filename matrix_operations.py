@@ -68,7 +68,6 @@ class Fraction:
         return cls(numerator, denominator)
 
 def get_input_matrix():
-    print("请输入二维数组(每行以空格分隔,回车结束输入):")
     input_lines = []
     while True:
         line = input().strip()
@@ -85,11 +84,14 @@ def get_input_matrix():
     for row in input_str.split('\n'):
         row_data = []
         for item in row.split():
-            if '/' in item:  # 处理分数形式
-                numerator, denominator = map(int, item.split('/'))
-                row_data.append(Fraction(numerator, denominator))
-            else:  # 处理整数或小数形式
-                row_data.append(Fraction.from_float(float(item)))
+            try:
+                if '/' in item:  # 处理分数形式
+                    numerator, denominator = map(int, item.split('/'))
+                    row_data.append(Fraction(numerator, denominator))
+                else:  # 处理整数或小数形式
+                    row_data.append(Fraction.from_float(float(item)))
+            except ValueError:
+                raise ValueError(f"输入错误：'{item}'不是有效的数字或分数形式。")
         # 补齐0
         row_data += [Fraction(0)] * (row_max_length - len(row_data))
         matrix_data.append(row_data)

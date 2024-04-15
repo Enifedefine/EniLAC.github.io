@@ -1,2 +1,3 @@
 #!/bin/bash
-python3 ./LinearAlgebraCarculator/main.py
+cd $(dirname "$0")
+python3 main.py
