@@ -2,10 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Page</title>
+    <title>Run Python File with Pyodide</title>
+    <script type="module">
+        importScripts('https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js').then(() => {
+            // Initialize Pyodide
+            pyodide.loadPackage(['@micropython']).then(() => {
+                // Load and run the Python file
+                fetch('main.py')
+                    .then(response => response.text())
+                    .then(pythonCode => pyodide.runPython(pythonCode));
+            });
+        });
+    </script>
 </head>
 <body>
-    <script src="targettt/main.js" type="module"></script>
+    <h1>Run Python File with Pyodide</h1>
+    <div id="output"></div>
 </body>
 </html>
