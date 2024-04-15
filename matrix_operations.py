@@ -1,4 +1,7 @@
-from math import gcd
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
 class Fraction:
     def __init__(self, numerator, denominator=1):
         common_divisor = gcd(numerator, denominator)
